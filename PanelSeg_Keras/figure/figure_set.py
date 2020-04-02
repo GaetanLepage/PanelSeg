@@ -29,13 +29,13 @@ class FigureSet:
 
             try:
                 if not os.path.exists(file):
-                    raise PanelSegError('Could not find %s.'.format(file))
+                    raise PanelSegError('Could not find {}.'.format(file))
                 figure = Figure()
                 figure.load_image(file)
 
                 xml_path = os.path.join(figure.image_path.replace('.jpg', '_data.xml'))
                 if not os.path.exists(xml_path):
-                    raise PanelSegError('Could not find %s.'.format(xml_path))
+                    raise PanelSegError('Could not find {}.'.format(xml_path))
                 figure.load_annotation_iphotodraw(xml_path)
 
             except PanelSegError as ex:
@@ -50,13 +50,13 @@ class FigureSet:
 
             try:
                 if not os.path.exists(file):
-                    raise PanelSegError('Could not find %s.'.format(file))
+                    raise PanelSegError('Could not find {}.'.format(file))
                 figure = Figure()
                 figure.load_image(file)
 
                 xml_path = os.path.join(figure.image_path.replace('.jpg', '_data.xml'))
                 if not os.path.exists(xml_path):
-                    raise PanelSegError('Could not find %s.'.format(xml_path))
+                    raise PanelSegError('Could not find {}.'.format(xml_path))
                 figure.load_annotation_iphotodraw(xml_path)
 
             except PanelSegError as ex:

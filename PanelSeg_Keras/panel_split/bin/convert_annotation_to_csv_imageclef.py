@@ -1,5 +1,5 @@
 import csv
-import cv2
+from cv2 import cv2
 import sys
 import os
 import argparse
@@ -39,7 +39,7 @@ def main(args=None):
     if args is None:
         args = sys.argv[1:]
     args = parse_args(args)
-    
+
     image_paths = list()
 
     with open(args.csv_path, 'w', newline='') as csvfile:

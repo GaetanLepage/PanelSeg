@@ -1,0 +1,5 @@
+tensorflow-gpu==1.15
+keras
+opencv-python
+Pillow
+keras_retinanet

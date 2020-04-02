@@ -19,7 +19,7 @@ limitations under the License.
 import argparse
 import os
 import sys
-import cv2
+from cv2 import cv2
 
 # Allow relative imports when being executed as script.
 if __name__ == "__main__" and __package__ is None:

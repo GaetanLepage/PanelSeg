@@ -1,6 +1,6 @@
 import csv
 import os
-import cv2
+from cv2 import cv2
 import logging
 import xml.etree.ElementTree as ET
 from figure import misc
@@ -16,6 +16,7 @@ class Figure:
     image_orig is the original color image
     panels contain all panels
     """
+
     def __init__(self, image_path):
         self.image_path = image_path
         self.panels = None
@@ -23,10 +24,12 @@ class Figure:
         self.image_width = 0
         self.image_height = 0
 
+
     def load_image(self):
         img = cv2.imread(self.image_path)  # BGR image, we need to convert it to RGB image
         self.image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.image_height, self.image_width = self.image.shape[:2]
+
 
     def load_annotation_iphotodraw(self, annotation_file_path):
         """
@@ -136,6 +139,7 @@ class Figure:
                 panel.panel_rect = misc.union(panel.label_rect, panel.panel_rect)
 
         self.panels = panels
+
 
     def load_annotation_csv(self, annotation_file_path):
         panels = []
