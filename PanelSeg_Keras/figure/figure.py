@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import csv
 import os
 from cv2 import cv2
@@ -11,13 +13,21 @@ import tensorflow as tf
 class Figure:
     """
     A class for a Figure
-    image_path is the path to the figure image file
-    id is the unique id to each figure
-    image_orig is the original color image
-    panels contain all panels
+
+    Attributes:
+        image_path: is the path to the figure image file
+        id: is the unique id to each figure
+        image_orig: is the original color image
+        panels: contain all panels
     """
 
-    def __init__(self, image_path):
+    def __init__(self, image_path: str):
+        """
+        Constructor for a Figure object.
+
+        Args:
+            image_path: path to the image file
+        """
         self.image_path = image_path
         self.panels = None
         self.image = None
@@ -26,17 +36,25 @@ class Figure:
 
 
     def load_image(self):
+        """
+        Load the image using `self.image_path` and stores it
+        in `self.image`.
+        """
         img = cv2.imread(self.image_path)  # BGR image, we need to convert it to RGB image
         self.image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.image_height, self.image_width = self.image.shape[:2]
 
 
-    def load_annotation_iphotodraw(self, annotation_file_path):
+    def load_annotation_iphotodraw(self, annotation_file_path: str):
         """
-        Load iPhotoDraw annotation
+        Load iPhotoDraw annotation.
+
+        Args:
+            annotation_file_path
         """
         # create element tree object
         tree = ET.parse(annotation_file_path)
+
         # get root element
         root = tree.getroot()
 

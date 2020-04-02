@@ -3,3 +3,8 @@ keras
 opencv-python
 Pillow
 keras_retinanet
+pycocotools
+matplotlib
+
+Sphinx
+sphinx_rtd_theme

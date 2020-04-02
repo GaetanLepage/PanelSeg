@@ -147,8 +147,10 @@ def assign_labels_to_panels(panels, labels):
     Use beam search to assign labels to panels according to the overall distance
     Assign labels.label_rect to panels.label_rect
     panels and labels must have the same length
-    :param panels: panels having the same label character
-    :param labels: labels having the same label character
+
+    Parameters:
+        * panels: panels having the same label character
+        * labels: labels having the same label character
     """
     # calculate distance from panels to labels
     distances = []
@@ -204,6 +206,15 @@ def assign_labels_to_panels(panels, labels):
 
 
 def read_sample_list(list_path):
+    """
+    TODO
+
+    Parameters :
+        * list_path (TODO): TODO
+
+    Returns :
+        * TODO (TODO): TODO
+    """
     with tf.gfile.GFile(list_path) as fid:
         lines = fid.readlines()
     return [line.strip().split(' ')[0] for line in lines]

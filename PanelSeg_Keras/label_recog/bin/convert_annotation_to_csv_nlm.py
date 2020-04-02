@@ -7,7 +7,21 @@ from figure.figure import Figure
 from figure.misc import map_label
 
 
+"""
+TODO
+"""
+
+
 def parse_args(args):
+    """
+    TODO
+
+    Parameters:
+        * args (TODO): TODO
+
+    Return:
+        * parser (ArgumentParser): TODO
+    """
     parser = argparse.ArgumentParser(description='Convert PanelSeg data set to CSV format.')
     parser.add_argument('--list_path',
                         help='The path to the list file.',
@@ -38,8 +52,14 @@ def main(args=None):
             # if '1465-9921-6-55-4' not in file:
             #     continue
             print('Processing Image {:d}: {:s}.'.format(idx, file))
+
+            # Create figure object
             figure = Figure(file)
+
+            # Load image
             figure.load_image()
+
+            # Load annotation
             xml_path = os.path.join(figure.image_path.replace('.jpg', '_data.xml'))
             figure.load_annotation_iphotodraw(xml_path)
 
@@ -48,13 +68,17 @@ def main(args=None):
             # image_path,label_x1,label_y1,label_x2,label_y2,label
             # if there is no label, the format becomes:
             # image_path,,,,,
+
+            # TODO : factorize this
             has_label = False
             for panel in figure.panels:
                 if panel.label_rect is not None:
                     label = map_label(panel.label)
                     if len(label) == 1:  # We care for single letter label for now
                         row = list()
-                        row.append(figure.image_path)  # add image_path
+
+                        # add image_path
+                        row.append(figure.image_path)
                         row.append(str(panel.label_rect[0]))
                         row.append(str(panel.label_rect[1]))
                         row.append(str(panel.label_rect[2]))

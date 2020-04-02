@@ -2,12 +2,23 @@ import os
 import pickle
 import sys
 import argparse
+import logging
 import tensorflow as tf
 
 from figure.figure import Figure
 
 
 def parse_args(args):
+    """
+    TODO
+
+    Parameters:
+        * args (TODO): TODO
+
+    Returns:
+        * parser (ArgumentParser): TODO
+    """
+
     parser = argparse.ArgumentParser(description='Evaluate Panel Split.')
 
     parser.add_argument('--eval_list', help='Path to the eval list file.',
@@ -67,7 +78,7 @@ def eval_ImageCLEF(args):
 
     #  Read all figures to be evaluated
     with open(args.eval_list) as f:
-        lines = f.readlines()
+        eval_list = f.readlines()
 
     with open(args.eval_file, 'a') as f:
 
@@ -79,11 +90,11 @@ def eval_ImageCLEF(args):
         overall_recall = 0.0
         overall_precision = 0.0
 
-        for idx, filepath in enumerate(lines):
+        for idx, filepath in enumerate(eval_list):
             # if '1471-213X-8-30-5' not in filepath:
             #     continue
 
-            print(str(idx) + ': ' + filepath)
+            logging.info(str(idx) + ': ' + filepath)
             filepath = filepath.strip()
             figure = Figure(filepath)
             if 'clef_eval' in args.eval_list:
@@ -120,9 +131,9 @@ def eval_ImageCLEF(args):
             overall_gt_count += len(gt_panels)
             overall_auto_count += len(auto_panels)
 
-        overall_accuracy /= len(lines)
-        overall_precision /= len(lines)
-        overall_recall /= len(lines)
+        overall_accuracy /= len(eval_list)
+        overall_precision /= len(eval_list)
+        overall_recall /= len(eval_list)
 
         f.write("Overall ImageCLEF Accuracy: {}, Precision: {}, Recall: {}\n".format(
             overall_accuracy, overall_precision, overall_recall))
@@ -138,7 +149,7 @@ def eval_ImageCLEF(args):
 def eval_mAP(args):
     #  Read all figures to be evaluated
     with open(args.eval_list) as f:
-        lines = f.readlines()
+        eval_list = f.readlines()
 
     all_boxes = []
     all_scores = []
@@ -146,7 +157,7 @@ def eval_mAP(args):
     figures = []
     with open(args.eval_file, 'a') as f:
 
-        for idx, filepath in enumerate(lines):
+        for idx, filepath in enumerate(eval_list):
             print(str(idx) + ': ' + filepath)
             filepath = filepath.strip()
             figure = Figure(filepath, padding=0)
@@ -165,6 +176,13 @@ def eval_mAP(args):
 
 
 def main(args=None):
+    """
+    TODO
+
+    Parameters:
+        * args (TODO): TODO
+    """
+
     # parse arguments
     if args is None:
         args = sys.argv[1:]
